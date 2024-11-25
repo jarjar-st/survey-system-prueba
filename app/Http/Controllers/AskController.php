@@ -87,4 +87,16 @@ class AskController extends Controller
         return response()->json(['message' => 'La pregunta se ha borrado de manera correcto'], 200);
     }
 
+    public function generateReport($id)
+    {
+        // Verifica que la pregunta exista
+        $ask = Ask::find($id);
+
+        if (!$ask) {
+            return response()->json(['error' => 'Pregunta no encontrada'], 404);
+        }
+
+        // Genera y descarga el reporte en Excel
+        return Excel::download(new AskReportExport($id), 'ask_report.xlsx');
+    }
 }

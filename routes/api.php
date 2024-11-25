@@ -14,6 +14,7 @@ Route::apiResource('answers', AnswerController::class);
 Route::apiResource('votings', VotingController::class);
 
 Route::get('answers/{id}/votes', [VotingController::class, 'countVotes']);
+Route::get('asks/{id}/report', [AskController::class, 'generateReport']);
 
 Route::get('/user', function (Request $request) {
     return $request->user();
